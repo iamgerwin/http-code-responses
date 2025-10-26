@@ -1,0 +1,45 @@
+{
+  "name": "http-code-responses",
+  "version": "0.1.0",
+  "description": "Readable HTTP status code constants with reason phrases and helpers.",
+  "keywords": [
+    "http",
+    "status",
+    "codes",
+    "constants",
+    "response",
+    "reason-phrases"
+  ],
+  "author": "",
+  "license": "",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format esm,cjs --sourcemap",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.12",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  }
+}
