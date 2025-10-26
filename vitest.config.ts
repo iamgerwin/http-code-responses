@@ -4,8 +4,11 @@ export default defineConfig({
   test: {
     globals: true,
     coverage: {
-      enabled: false,
+      enabled: true,
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      reportsDirectory: './coverage',
+      exclude: ['**/test/**', '**/*.d.ts']
     },
   },
 })
-
