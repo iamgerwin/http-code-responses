@@ -48,11 +48,26 @@ jobs:
           PKG_NAME=$(node -p "require('./package.json').name")
           PKG_VERSION=$(node -p "require('./package.json').version")
           echo "Package: ${PKG_NAME} Version: ${PKG_VERSION}"
-          # Check if version exists on npm
-          EXISTS=$(npm view "${PKG_NAME}" versions --json | node -e "const fs=require('fs');const v=process.env.V;const d=fs.readFileSync(0,'utf8')||'[]';try{const arr=JSON.parse(d)||[];console.log(Array.isArray(arr)&&arr.includes(v)?'yes':'no')}catch(e){console.log('no')}")
-          if [ "$EXISTS" = "no" ]; then
-            echo "Publishing ${PKG_NAME}@${PKG_VERSION} to npm..."
-            npm publish --access public
-          else
+          # Check if version exists on npm (two methods)
+          EXISTS1=$(npm view "${PKG_NAME}" versions --json | node -e "const fs=require('fs');const v=process.env.V;const d=fs.readFileSync(0,'utf8')||'[]';try{const arr=JSON.parse(d)||[];console.log(Array.isArray(arr)&&arr.includes(v)?'yes':'no')}catch(e){console.log('no')}")
+          EXISTS2=$(npm info "${PKG_NAME}@${PKG_VERSION}" version --json 2>/dev/null | grep -q "${PKG_VERSION}" && echo yes || echo no)
+          if [ "$EXISTS1" = "yes" ] || [ "$EXISTS2" = "yes" ]; then
             echo "${PKG_NAME}@${PKG_VERSION} already on npm; skipping publish."
+            exit 0
           fi
+
+          echo "Publishing ${PKG_NAME}@${PKG_VERSION} to npm..."
+          if npm publish --access public; then
+            echo "Publish succeeded."
+            exit 0
+          fi
+
+          echo "Publish command failed. Rechecking registry..."
+          sleep 5
+          EXISTS_AFTER=$(npm info "${PKG_NAME}@${PKG_VERSION}" version --json 2>/dev/null | grep -q "${PKG_VERSION}" && echo yes || echo no)
+          if [ "$EXISTS_AFTER" = "yes" ]; then
+            echo "Version is visible on npm now; treating as success."
+            exit 0
+          fi
+          echo "Publish still not visible on npm; failing."
+          exit 1
