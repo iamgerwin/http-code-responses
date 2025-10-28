@@ -15,7 +15,9 @@ export default {
     [
       "@semantic-release/npm",
       {
-        npmPublish: true,
+        // Let semantic-release manage versioning and package.json updates,
+        // but publish via a separate npm publish step in CI.
+        npmPublish: false,
       },
     ],
     "@semantic-release/github",
@@ -29,4 +31,3 @@ export default {
     ],
   ],
 }
-
