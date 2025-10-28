@@ -39,3 +39,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
+      - name: Conditional publish to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          echo "Package: ${PKG_NAME} Version: ${PKG_VERSION}"
+          # Check if version exists on npm
+          EXISTS=$(npm view "${PKG_NAME}" versions --json | node -e "const fs=require('fs');const v=process.env.V;const d=fs.readFileSync(0,'utf8')||'[]';try{const arr=JSON.parse(d)||[];console.log(Array.isArray(arr)&&arr.includes(v)?'yes':'no')}catch(e){console.log('no')}")
+          if [ "$EXISTS" = "no" ]; then
+            echo "Publishing ${PKG_NAME}@${PKG_VERSION} to npm..."
+            npm publish --access public
+          else
+            echo "${PKG_NAME}@${PKG_VERSION} already on npm; skipping publish."
+          fi
