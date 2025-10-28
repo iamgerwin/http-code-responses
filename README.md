@@ -5,6 +5,9 @@
 [![license](https://img.shields.io/npm/l/http-code-responses)](https://github.com/iamgerwin/http-code-responses#license)
 [![CI](https://github.com/iamgerwin/http-code-responses/actions/workflows/ci.yml/badge.svg)](https://github.com/iamgerwin/http-code-responses/actions/workflows/ci.yml)
 [![coverage](https://codecov.io/gh/iamgerwin/http-code-responses/branch/main/graph/badge.svg)](https://codecov.io/gh/iamgerwin/http-code-responses)
+![types](https://img.shields.io/npm/types/http-code-responses)
+![bundle size](https://img.shields.io/bundlephobia/minzip/http-code-responses)
+![node](https://img.shields.io/node/v/http-code-responses)
 
 Readable HTTP status code constants with reason phrases and helpers.
 
