@@ -1,4 +1,4 @@
-**http-code-responses**
+# http-code-responses
 
 Readable HTTP status code constants with reason phrases and helpers.
 
@@ -61,4 +61,3 @@ Notes
 License
 
 - You can set the license of your choice before publishing (the `license` field in `package.json` is intentionally blank).
-
