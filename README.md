@@ -1,5 +1,11 @@
 # http-code-responses
 
+[![npm version](https://img.shields.io/npm/v/http-code-responses)](https://www.npmjs.com/package/http-code-responses)
+[![npm downloads](https://img.shields.io/npm/dm/http-code-responses)](https://www.npmjs.com/package/http-code-responses)
+[![license](https://img.shields.io/npm/l/http-code-responses)](https://github.com/iamgerwin/http-code-responses#license)
+[![CI](https://github.com/iamgerwin/http-code-responses/actions/workflows/ci.yml/badge.svg)](https://github.com/iamgerwin/http-code-responses/actions/workflows/ci.yml)
+[![coverage](https://codecov.io/gh/iamgerwin/http-code-responses/branch/main/graph/badge.svg)](https://codecov.io/gh/iamgerwin/http-code-responses)
+
 Readable HTTP status code constants with reason phrases and helpers.
 
 - Concise constants for every standard HTTP status code
