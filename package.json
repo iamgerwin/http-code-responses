@@ -1,6 +1,6 @@
 {
   "name": "http-code-responses",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Readable HTTP status code constants with reason phrases and helpers.",
   "keywords": [
     "http",
@@ -10,8 +10,8 @@
     "response",
     "reason-phrases"
   ],
-  "author": "",
-  "license": "",
+  "author": "Gerwin",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iamgerwin/http-code-responses.git"
